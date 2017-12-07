@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cfwu.music5.widget.PlayView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp">
+
+            <ImageButton
+                android:id="@+id/paly"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/play_song"
+                android:scaleType="fitXY"
+                android:visibility="visible"
+                />
+
+            <ImageButton
+                android:id="@+id/stop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/stop_song"
+                android:scaleType="fitXY"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/next_song"
+            android:scaleType="fitXY"/>
+
+    </LinearLayout>
+
+</com.cfwu.music5.widget.PlayView>
