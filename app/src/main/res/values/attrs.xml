@@ -14,4 +14,5 @@
         <attr name="sameLine" format="boolean" />
         <attr name="pst_textAllCaps" format="boolean" />
     </declare-styleable>
+
 </resources>

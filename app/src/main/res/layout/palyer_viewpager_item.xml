@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:snser="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal">
+
+    <com.cfwu.music5.widget.ImageViewPlus
+        android:id="@+id/iv_song"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:background="#008080FF"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/ic_launcher"
+        snser:borderColor="#FF0080FF"
+        snser:borderWidth="1dp"
+        snser:rectRoundRadius="10dp"
+        snser:type="circle" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/tv_song_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="歌名"
+            android:textSize="8sp" />
+
+        <TextView
+            android:id="@+id/tv_song_singer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_song_name"
+            android:text="演唱者"
+            android:textSize="8sp" />
+    </RelativeLayout>
+
+</LinearLayout>

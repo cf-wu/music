@@ -10,10 +10,10 @@ public class LogUtils {
     private static String TAG;
     public static void Log_D(Object clazz,String message){
         TAG= clazz.getClass().getName();
-        if (DEBUG) Log.d(TAG, message);
+        if (DEBUG) Log.d(TAG+"CHUFEI", message);
     }
     public static void Log_D(Object clazz,Boolean message){
         TAG= clazz.getClass().getName();
-        if (DEBUG) Log.d(TAG, ""+message);
+        if (DEBUG) Log.d(TAG+"CHUFEI", ""+message);
     }
 }
