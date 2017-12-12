@@ -14,7 +14,7 @@ public final class AGLog {
 
 	/** 日志输出时的TAG */
 
-	private static String mTag = "agxxxxx";
+	private static String mTag = "CHUFEI";
 
 
 	/** 日志输出级别NONE */

@@ -1,9 +1,9 @@
 package com.cfwu.music5.base;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.cfwu.music5.R;
 import com.cfwu.music5.utils.LogUtils;
@@ -11,7 +11,7 @@ import com.cfwu.music5.utils.LogUtils;
 /**
  * Created by cfwu on 17-12-7.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);

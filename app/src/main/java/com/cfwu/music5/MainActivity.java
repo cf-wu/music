@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.cfwu.music5.adapter.MainPagerAdapter;
+import com.cfwu.music5.adapter.FragmentAdapter;
 import com.cfwu.music5.base.BaseActivity;
 import com.cfwu.music5.service.PlayerService;
 import com.cfwu.music5.widget.PlayView;
@@ -41,7 +41,8 @@ public class MainActivity extends BaseActivity {
         mIndicator= (TabPageIndicator) findViewById(R.id.main_actionbar);
         mPlayView= (PlayView) findViewById(R.id.player);
         mViewPager= (ViewPager) findViewById(R.id.main_viewpager);
-        mViewPager.setAdapter(new MainPagerAdapter(this,mData));
+        //mViewPager.setAdapter(new MainPagerAdapter(this,mData));
+        mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         mIndicator.setViewPager(mViewPager);
     }
     /*

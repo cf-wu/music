@@ -21,7 +21,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         NetUtils.getInstance().getPaySongData("877578", new NetCallBack<PaySongBean>() {
             @Override
             public void onSuccess(PaySongBean paySongBean) {
-                LogUtils.Log_D(this,paySongBean.toString());
+                LogUtils.Log_D(this,paySongBean.songinfo.toString());
             }
 
             @Override
