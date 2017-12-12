@@ -40,24 +40,24 @@ public class RecycAdapter extends RecyclerView.Adapter<RecycAdapter.ViewH> {
 
     @Override
     public void onBindViewHolder(ViewH viewH, int i) {
-        switch (i){
-            case 0:
-                viewH.tv1.setText(mDataNew.get(1).title);
-                viewH.tv1.setText(mDataNew.get(2).title);
-                viewH.tv1.setText(mDataNew.get(3).title);
-            case 1:
-                viewH.tv1.setText(mDataHot.get(1).title);
-                viewH.tv1.setText(mDataHot.get(2).title);
-                viewH.tv1.setText(mDataHot.get(3).title);
-            case 2:
-                viewH.tv1.setText(mDataRoll.get(1).title);
-                viewH.tv1.setText(mDataRoll.get(2).title);
-                viewH.tv1.setText(mDataRoll.get(3).title);
-            default:
+//        switch (i){
+//            case 0:
+//                viewH.tv1.setText(mDataNew.get(1).title);
+//                viewH.tv1.setText(mDataNew.get(2).title);
+//                viewH.tv1.setText(mDataNew.get(3).title);
+//            case 1:
+//                viewH.tv1.setText(mDataHot.get(1).title);
+//                viewH.tv1.setText(mDataHot.get(2).title);
+//                viewH.tv1.setText(mDataHot.get(3).title);
+//            case 2:
+//                viewH.tv1.setText(mDataRoll.get(1).title);
+//                viewH.tv1.setText(mDataRoll.get(2).title);
+//                viewH.tv1.setText(mDataRoll.get(3).title);
+//            default:
                 viewH.tv1.setText("ccc");
                 viewH.tv1.setText("ccc");
                 viewH.tv1.setText("ccc");
-        }
+//        }
 
 
     }
