@@ -1,0 +1,480 @@
+http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&size=1&from=webapp_music&type=1&offset=1&calback=&format=json
+http://tingapi.ting.baidu.com/v1/restserver/ting?baidu.ting.song.downWeb&songid=877578&bit=24&_t=1393123213&calback=&format=json
+
+例：method=baidu.ting.song.downWeb&songid=877578&bit=24&_t=1393123213
+
+    参数： songid = 877578//歌曲id
+
+    bit = 24, 64, 128, 192, 256, 320 ,flac//码率
+
+    _t = 1430215999,, //时间戳
+
+八、获取歌手信息
+
+    例：method=baidu.ting.artist.getInfo&tinguid=877578
+
+    参数： tinguid = 877578 //歌手ting id
+
+九、获取歌手歌曲列表
+
+    例：method=baidu.ting.artist.getSongList&tinguid=877578&limits=6&use_cluster=1&order=2
+
+    参数： tinguid = 877578//歌手ting id
+
+    limits = 6//返回条目数量
+
+    其他就不用管了
+
+作者：ldjhust
+链接：http://www.jianshu.com/p/a6718b11fdf1
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+前段时间做了一个本地音乐的播放器 github地址，想实现在线播放的功能，于是到处寻找API，很遗憾，不是歌曲不全就是质量不高。在网上发现这么一个APIMRASONG博客，有“获取榜单，搜索歌词，下载地址，专辑”信息等等接口。
+
+后来发现有些接口使用起来不是很方便，比如获取专辑信息，只能得到歌曲列表的id信息，所以自己决定用fiddler来对百度音乐安卓客户端抓包。
+
+下面是一系列的接口：
+一. 关键词建议：
+
+GET:
+
+ http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.search.catalogSug&format=json&query=%E4%B8%83%E9%87%8C%E9%A6%99
+
+参数:
+
+version   5.6.5.0    //版本
+query   七里香//关键字
+method  baidu.ting.search.catalogSug//method
+fromandroid    //平台
+formatjson   //format格式
+
+返回：
+
+{
+  "song": [
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "周杰伦",
+  "control": "0000000000",
+  "songid": "15702101",
+  "has_mv": "1",
+  "encrypted_songid": "0806ef98550855dddac0"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香(live版)",
+  "artistname": "周杰伦",
+  "control": "0000000000",
+  "songid": "18638327",
+  "has_mv": "0",
+  "encrypted_songid": "920711c65f70855e5be03"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "周玥178",
+  "control": "0000000000",
+  "songid": "121794230",
+  "has_mv": "0",
+  "encrypted_songid": ""
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "刘芳",
+  "control": "0000000000",
+  "songid": "2077664",
+  "has_mv": "0",
+  "encrypted_songid": "50061fb3e00854ce60db"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "网络歌手",
+  "control": "0000000000",
+  "songid": "28216714",
+  "has_mv": "0",
+  "encrypted_songid": "31071ae8d8a0854cc129e"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香(Live)",
+  "artistname": "周杰伦",
+  "control": "0000000000",
+  "songid": "51981196",
+  "has_mv": "0",
+  "encrypted_songid": "58073192b8c0855ddd8da"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "汪东城",
+  "control": "0000000000",
+  "songid": "84961907",
+  "has_mv": "0",
+  "encrypted_songid": "08075106a730854cdd805"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "施艾敏",
+  "control": "0000000000",
+  "songid": "17565909",
+  "has_mv": "0",
+  "encrypted_songid": "420710c08d508559df21f"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "苏仨",
+  "control": "0000000000",
+  "songid": "84957626",
+  "has_mv": "0",
+  "encrypted_songid": "830751059ba08559df358"
+},
+{
+  "bitrate_fee": "{\"0\":\"0|0\",\"1\":\"0|0\"}",
+  "yyr_artist": "0",
+  "songname": "七里香",
+  "artistname": "陈淑桦",
+  "control": "0000000000",
+  "songid": "208828",
+  "has_mv": "0",
+  "encrypted_songid": "370532fbc0855e3ed63"
+}
+  ],
+  "order": "song,album",
+  "error_code": 22000,
+  "album": [
+    {
+  "albumname": "七里香",
+  "artistpic": "http:\/\/musicdata.baidu.com\/data2\/pic\/115430839\/115430839.jpg",
+  "albumid": "67909",
+  "artistname": "周杰伦"
+},
+{
+  "albumname": "七里香(台湾正式版)",
+  "artistpic": "http:\/\/a.hiphotos.baidu.com\/ting\/pic\/item\/3b292df5e0fe9925ff46084536a85edf8db17158.jpg",
+  "albumid": "183906",
+  "artistname": "周杰伦 "
+}
+  ]
+}
+
+二. 关键字搜索（包括歌曲，专辑，歌手，伴奏）
+
+GET:
+
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.search.merge&format=json&query=%E4%B8%83%E9%87%8C%E9%A6%99&page_no=1&page_size=50&type=-1&data_source=0&use_cluster=1 
+
+参数：（下面应该很容易懂，就不具体解释了）
+
+version     5.6.5.0
+method   baidu.ting.search.merge
+format   json
+query    七里香
+page_no  1
+page_size 50
+type        -1
+data_source  0
+use_cluster  1
+
+返回值：
+
+{
+"error_code": 22000,
+"result": {
+    "query": "七里香",
+    "syn_words": "",
+    "rqt_type": 1,
+    "song_info": {
+        "total": 69,
+        "song_list": [
+            {
+                "content": "",
+                "copy_type": "1",
+                "toneid": "0",
+                "info": "",
+                "all_rate": "320,128,flac,256,192,64,24",
+                "resource_type": 2,
+                "relate_status": 0,
+                "has_mv_mobile": 1,
+                "song_id": "18401298",
+                "title": "七里香",
+                "ting_uid": "7994",
+                "author": "周杰伦",
+                "album_id": "18394691",
+                "album_title": "第五届百事音乐风云榜",
+                "is_first_publish": 0,
+                "havehigh": 2,
+                "charge": 0,
+                "has_mv": 0,
+                "learn": 0,
+                "song_source": "web",
+                "piao_id": "0",
+                "korean_bb_song": "0",
+                "resource_type_ext": "0",
+                "artist_id": "29",
+                "all_artist_id": "29",
+                "lrclink": "http://musicdata.baidu.com/data2/lrc/65094964/%E4%B8%83%E9%87%8C%E9%A6%99.lrc",
+                "data_source": 0,
+                "cluster_id": 93119037
+            },
+            {
+                "content": "",
+                "copy_type": "1",
+                "toneid": "600902000006889283",
+                "info": "",
+                "all_rate": "128,64,256,192,320,flac,24",
+                "resource_type": 2,
+                "relate_status": 0,
+                "has_mv_mobile": 1,
+                "song_id": "290466",
+                "title": "止战之殇.",
+                "ting_uid": "7994",
+                "author": "周杰伦",
+                "album_id": "67909",
+                "album_title": "",
+                "is_first_publish": 0,
+                "havehigh": 2,
+                "charge": 0,
+                "has_mv": 1,
+                "learn": 1,
+                "song_source": "web",
+                "piao_id": "0",
+                "korean_bb_song": "0",
+                "resource_type_ext": "0",
+                "artist_id": "29",
+                "all_artist_id": "29",
+                "lrclink": "http://musicdata.baidu.com/data2/lrc/13881596/%E6%AD%A2%E6%88%98%E4%B9%8B%E6%AE%87..lrc",
+                "data_source": 0,
+                "cluster_id": 93304629
+            },
+          ......
+        ]
+    },
+    "album_info": {
+        "total": 2,
+        "album_list": [
+            {
+                "album_id": "67909",
+                "author": "周杰伦",
+                "hot": 22412,
+                "title": "<em>七里香</em>",
+                "artist_id": "29",
+                "all_artist_id": "29",
+                "company": "杰威尔JVR音乐有限公司",
+                "publishtime": "2004-08-03",
+                "album_desc": "周杰伦的新专辑在8月3日正式发行，这次引用了诗人席幕蓉名诗《<em>七里香</em>》作为新专辑名称，周杰伦以往每一次的专辑名称都给了歌迷许多想象空间，也给了大家许多惊叹号。这次也许并不令人惊喜。但是周杰伦自有说法：“...",
+                "pic_small": "http://musicdata.baidu.com/data2/pic/115430825/115430825.jpg"
+            },
+            {
+                "album_id": "183906",
+                "author": "周杰伦 ",
+                "hot": 10799,
+                "title": "<em>七里香</em>(台湾正式版)",
+                "artist_id": "29",
+                "all_artist_id": "29",
+                "company": "杰威尔JVR音乐有限公司",
+                "publishtime": "2004-08-03",
+                "album_desc": "周杰伦的新专辑在8月3日正式发行,这次引用了诗人席幕蓉名诗《<em>七里香</em>》作为新专辑名称,周杰伦以往每一次的专辑名称都给了歌迷许多想象空间,也给了大家许多惊叹号。这次也许并不令人惊喜。但是周杰伦自有说法：“...",
+                "pic_small": "http://c.hiphotos.baidu.com/ting/pic/item/b8389b504fc2d562b542b1f8e51190ef76c66c58.jpg"
+            }
+        ]
+    }
+}
+
+}
+三. 获取专辑详情：
+
+GET
+
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.album.getAlbumInfo&format=json&album_id=67909
+
+参数：
+
+from  android
+version   5.6.5.0
+method    baidu.ting.album.getAlbumInfo
+format    json
+album_id  67909
+
+返回：
+
+{
+"albumInfo": {
+    "album_id": "67909",
+    "author": "周杰伦",
+    "title": "七里香",
+    "publishcompany": "杰威尔JVR音乐有限公司",
+    "prodcompany": "",
+    "country": "港台",
+    "language": "国语",
+    "songs_total": "9",
+    "info": "周杰伦的新专辑在8月3日正式发行，这次引用了诗人席幕蓉名诗《七里香》作为新专辑名称，周杰伦以往每一次的专辑名称都给了歌迷许多想象空间，也给了大家许多惊叹号。这次也许并不令人惊喜。但是周杰伦自有说法：“之所以要把新专辑定名为《七里香》，是因为对这一次专辑的音乐充满自信，希望大家能把注意力焦点放在音乐上，将话题回归到音乐上。 这张《七里香》仍是周杰伦与最佳拍档方文山合作的作品。在炎热的夏天听《七里香》，有一种如沐清风的凉爽",
+    "styles": "流行",
+    "style_id": "3",
+    "publishtime": "2004-08-03",
+    "artist_ting_uid": "7994",
+    "all_artist_ting_uid": null,
+    "gender": "0",
+    "area": "1",
+    "pic_small": "http://musicdata.baidu.com/data2/pic/115430825/115430825.jpg",
+    "pic_big": "http://musicdata.baidu.com/data2/pic/115430815/115430815.jpg",
+    "hot": "",
+    "favorites_num": null,
+    "recommend_num": null,
+    "artist_id": "29",
+    "all_artist_id": "29",
+    "pic_radio": "http://musicdata.baidu.com/data2/pic/115430799/115430799.jpg",
+    "pic_s500": "http://musicdata.baidu.com/data2/pic/115430794/115430794.jpg",
+    "pic_s1000": "http://musicdata.baidu.com/data2/pic/115430787/115430787.jpg"
+},
+"songlist": [
+    {
+        "artist_id": "29",
+        "all_artist_id": "29",
+        "all_artist_ting_uid": "7994",
+        "language": "国语",
+        "publishtime": "2004-08-03",
+        "album_no": "0",
+        "versions": "",
+        "pic_big": "http://musicdata.baidu.com/data2/pic/115430815/115430815.jpg",
+        "pic_small": "http://musicdata.baidu.com/data2/pic/115430825/115430825.jpg",
+        "hot": "1020",
+        "file_duration": "261",
+        "del_status": "0",
+        "resource_type": "2",
+        "copy_type": "1",
+        "has_mv_mobile": 0,
+        "all_rate": "320,128,256,64,flac,24,192",
+        "toneid": "600902000006889316",
+        "country": "其他",
+        "area": "4",
+        "lrclink": "http://musicdata.baidu.com/data2/lrc/34239973/%E5%80%9F%E5%8F%A3..lrc",
+        "song_id": "23744596",
+        "title": "借口.",
+        "ting_uid": "7994",
+        "author": "周杰伦",
+        "album_id": "67909",
+        "album_title": "",
+        "is_first_publish": 0,
+        "havehigh": 2,
+        "charge": 0,
+        "has_mv": 1,
+        "learn": 1,
+        "song_source": "web",
+        "piao_id": "0",
+        "korean_bb_song": "0",
+        "resource_type_ext": "0"
+    },
+    {
+        "artist_id": "29",
+        "all_artist_id": "29",
+        "all_artist_ting_uid": "7994",
+        "language": "国语",
+        "publishtime": "2004-08-03",
+        "album_no": "1",
+        "versions": "",
+        "pic_big": "http://musicdata.baidu.com/data2/pic/115430815/115430815.jpg",
+        "pic_small": "http://musicdata.baidu.com/data2/pic/115430825/115430825.jpg",
+        "hot": "3005",
+        "file_duration": "246",
+        "del_status": "0",
+        "resource_type": "2",
+        "copy_type": "1",
+        "has_mv_mobile": 1,
+        "all_rate": "64,320,128,flac,256,192,24",
+        "toneid": "600902000006889292",
+        "country": "其他",
+        "area": "4",
+        "lrclink": "http://musicdata.baidu.com/data2/lrc/13859215/%E6%88%91%E7%9A%84%E5%9C%B0%E7%9B%98-.lrc",
+        "song_id": "271627",
+        "title": "我的地盘-",
+        "ting_uid": "7994",
+        "author": "周杰伦",
+        "album_id": "67909",
+        "album_title": "",
+        "is_first_publish": 0,
+        "havehigh": 2,
+        "charge": 0,
+        "has_mv": 1,
+        "learn": 1,
+        "song_source": "web",
+        "piao_id": "0",
+        "korean_bb_song": "0",
+        "resource_type_ext": "0"
+    },
+    ......
+]
+
+}
+
+下面的只发简要说明：
+1). 获取歌曲列表：
+
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.artist.getSongList&format=json&order=2&tinguid=7994&artistid=7994&offset=0&limits=50
+
+2). 获取专辑列表：
+
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.artist.getAlbumList&format=json&order=1&tinguid=7994&offset=0&limits=30
+
+3). 获取歌手信息：
+
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.artist.getinfo&format=json&tinguid=7994&artistid=7994
+
+4). 获取歌词以及图片：
+
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.0&method=baidu.ting.search.lrcpic&format=json&query=Apollo%27s%2BTriumph%2B%28Paul%2BDinletir%2BRemix%29$$Audio%2BMachine&ts=1444316027469&e=6Wwvzqnijq08Nrv0qI%2BN3Thp9GuKdV82ZxAS3UrvifMc%2FoVWLyZ8dSolFUF5r4W3SB2tm4z5TWT95sihhOG7qeqvjhThJWnh6h745kRGSTI%3D&type=2
+
+1）搜索建议
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.search.catalogSug&format=json&query=%E5%B0%8F%E8%8B%B9%E6%9E%9C
+搜索建议：只有歌名
+http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.search.suggestion&query=%E5%B0%8F%E8%8B%B9%E6%9E%9C&format=json&from=ios&version=2.1.1
+2）搜索结果
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.search.common&format=json&query=%E5%B0%8F%E8%8B%B9%E6%9E%9C&page_no=1&page_size=30
+3）
+ http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.artist.getList&format=jsonℴ=1&offset=0&limit=5
+ 4）新歌榜
+ http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.billboard.billList&format=json&type=1&offset=0&size=50
+ 5）热歌榜
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.billboard.billList&format=json&type=2&offset=0&size=50  注意这个和上边的区别，type=1
+ 6）Billboard
+ http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.billboard.billList&format=json&type=8&offset=0&size=507）Hito中文榜
+7）Hito中文榜
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.billboard.billList&format=json&type=18&offset=0&size=50
+8）KTV热歌榜
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.billboard.billList&format=json&type=6&offset=0&size=50
+9）电台列表
+ http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.radio.getCategoryList&format=json
+
+
+ 10）获取某个电台下的歌曲列表
+ http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.radio.getChannelSong&format=json&pn=0&rn=10&channelname=public_tuijian_ktv
+ 11）获取songid的歌曲信息
+  http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.song.getInfos&format=json&songid=8059247&ts=1408284347323&e=JoN56kTXnnbEpd9MVczkYJCSx%2FE1mkLx%2BPMIkTcOEu4%3D&nw=2&ucf=1&res=1 
+  12）获取登陆用户的喜爱歌曲列表，其中bduss参数用来标示唯一的用户
+  http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.favorite.getFavoriteSong&format=json&pn=0&rn=50&bduss=UlXZ1dWbm9icDBrMm13aFcwZ282ejlTM1dyS1NEd2JPWXpQcDgyT0w0Vn5SUmhVQVFBQUFBJCQAAAAAAAAAAAEAAAB0L~cOeHl3MDQzNzM1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH-48FN~uPBTd
+  13)歌手列表
+  http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.artist.get72HotArtist&format=jsonℴ=1&offset=0&limit=50
+  14）歌手简介，tinguid为歌手id
+  http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.artist.getinfo&format=json&tinguid=7994
+  15）歌手歌曲列表，tinguid为歌手id
+  http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.artist.getSongList&format=jsonℴ=2&tinguid=7994&offset=0&limits=50
+16）新碟上架
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.plaza.getRecommendAlbum&format=json&offset=0&limit=50
+17）专辑信息
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.album.getAlbumInfo&format=json&album_id=122314357
+18）新歌速递
+http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.plaza.getNewSongs&format=json&limit=50
