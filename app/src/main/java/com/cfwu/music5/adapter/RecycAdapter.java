@@ -43,6 +43,8 @@ public class RecycAdapter extends RecyclerView.Adapter<RecycAdapter.ViewH> {
         LogUtils.Log_D(this,url);
         Glide.with(mContext).load(url).into(viewH.iv);
         viewH.tv1.setText(bean.title);
+        viewH.tv2.setText(bean.album_title);//专辑
+        viewH.tv3.setText(bean.artist_name);//songer
     }
 
     @Override

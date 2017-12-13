@@ -7,6 +7,7 @@ import com.cfwu.music5.bean.SongListBean;
 import com.cfwu.music5.fragments.Fragment2;
 import com.cfwu.music5.model.IFragment2Model;
 import com.cfwu.music5.model.impl.Fragment2Modelmpl;
+import com.cfwu.music5.presenter.IFragment2Presenter;
 import com.cfwu.music5.utils.LogUtils;
 import com.cfwu.music5.view.IFragment2View;
 
@@ -28,7 +29,7 @@ public class Fragment2PresenterImpl implements IFragment2Presenter {
 
 
     private void getRecyclerData(){
-        mModel.getData(1, 10, 0, new Observer<SongBillListBean>() {
+        mModel.getData(1, 50, 0, new Observer<SongBillListBean>() {
             @Override
             public void onCompleted() {
                 LogUtils.Log_D(this,"onCompleted");

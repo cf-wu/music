@@ -17,8 +17,8 @@ import com.cfwu.music5.R;
 import com.cfwu.music5.adapter.RecycAdapter;
 import com.cfwu.music5.base.BaseFragment;
 import com.cfwu.music5.bean.SongBillListBean;
+import com.cfwu.music5.presenter.IFragment2Presenter;
 import com.cfwu.music5.presenter.impl.Fragment2PresenterImpl;
-import com.cfwu.music5.presenter.impl.IFragment2Presenter;
 import com.cfwu.music5.view.IFragment2View;
 
 /**

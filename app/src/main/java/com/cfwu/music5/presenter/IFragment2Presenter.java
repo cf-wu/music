@@ -1,4 +1,4 @@
-package com.cfwu.music5.presenter.impl;
+package com.cfwu.music5.presenter;
 
 /**
  * Created by cfwu on 17-12-13.
