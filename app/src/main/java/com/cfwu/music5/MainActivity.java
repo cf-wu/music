@@ -41,7 +41,6 @@ public class MainActivity extends BaseActivity {
         mIndicator= (TabPageIndicator) findViewById(R.id.main_actionbar);
         mPlayView= (PlayView) findViewById(R.id.player);
         mViewPager= (ViewPager) findViewById(R.id.main_viewpager);
-        //mViewPager.setAdapter(new MainPagerAdapter(this,mData));
         mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         mIndicator.setViewPager(mViewPager);
     }

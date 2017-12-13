@@ -6,35 +6,35 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.cfwu.music5.R;
 import com.cfwu.music5.adapter.RecycAdapter;
-import com.cfwu.music5.api.NetCallBack;
-import com.cfwu.music5.api.NetUtils;
 import com.cfwu.music5.base.BaseFragment;
 import com.cfwu.music5.bean.SongBillListBean;
-import com.cfwu.music5.bean.SongListBean;
-import com.cfwu.music5.utils.LogUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.cfwu.music5.presenter.impl.Fragment2PresenterImpl;
+import com.cfwu.music5.presenter.impl.IFragment2Presenter;
+import com.cfwu.music5.view.IFragment2View;
 
 /**
  * Created by cfwu on 17-12-12.
  */
-public class Fragment2 extends BaseFragment{
+public class Fragment2 extends BaseFragment implements IFragment2View{
     private View mRootView;
     private RecyclerView mRecyclerView;
     private EditText mEditText;
     private ImageButton mImageButton;
     private RecyclerView.Adapter mAdapter;
-    private List<SongListBean> mDataNew = new ArrayList();
-    private List<SongListBean> mDataHot = new ArrayList();
-    private List<SongListBean> mDataRoll = new ArrayList();
-    private HashMap<String,List<SongListBean>> mData=new HashMap<>();
+    private IFragment2Presenter mPresenter;
+    private Button mReloadButton;
+    public ProgressBar mProgressBar;
+    public RelativeLayout mRootLayout;
+    public LinearLayout mErrorLayout;
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.layout_fragment2, container, false);
@@ -42,60 +42,37 @@ public class Fragment2 extends BaseFragment{
         return mRootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter=new Fragment2PresenterImpl(this);
+        mPresenter.OnCreat();
+    }
+
     private void initView() {
+        mProgressBar= (ProgressBar) mRootView.findViewById(R.id.recyc_progressbar);
+        mRootLayout= (RelativeLayout) mRootView.findViewById(R.id.recyc_rootRelat);
         mEditText= (EditText) mRootView.findViewById(R.id.et_search);
         mImageButton= (ImageButton) mRootView.findViewById(R.id.ibtn_search);
         mRecyclerView= (RecyclerView) mRootView.findViewById(R.id.recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        mAdapter=new RecycAdapter(mData);
-        mRecyclerView.setAdapter(mAdapter);
+        mErrorLayout= (LinearLayout) mRootView.findViewById(R.id.recyc_erro_message);
+        mReloadButton= (Button) mRootView.findViewById(R.id.recyc_reload);
+        initListener();
+    }
+
+    private void initListener() {
+        mReloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.reLoadData();
+            }
+        });
     }
 
     @Override
-    protected void initData() {
-        mData.put("new",mDataNew);
-        mData.put("hot",mDataHot);
-        mData.put("roll",mDataRoll);
-        NetUtils.getInstance().getSongBillListData(1, 20, 0, new NetCallBack<SongBillListBean>() {
-            @Override
-            public void onSuccess(SongBillListBean songBillListBean) {
-                for (SongListBean song:songBillListBean.song_list){
-                    mDataNew.add(song);
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMsg) {
-                LogUtils.Log_D(this,"get data fail:"+errorMsg.toString());
-            }
-        });
-        NetUtils.getInstance().getSongBillListData(2, 20, 0, new NetCallBack<SongBillListBean>() {
-            @Override
-            public void onSuccess(SongBillListBean songBillListBean) {
-                for (SongListBean song:songBillListBean.song_list){
-                    mDataHot.add(song);
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMsg) {
-                LogUtils.Log_D(this,"get data fail:"+errorMsg.toString());
-            }
-        });
-        NetUtils.getInstance().getSongBillListData(11, 20, 0, new NetCallBack<SongBillListBean>() {
-            @Override
-            public void onSuccess(SongBillListBean songBillListBean) {
-                for (SongListBean song:songBillListBean.song_list){
-                    mDataRoll.add(song);
-                }
-            }
-
-            @Override
-            public void onFailure(String errorMsg) {
-                LogUtils.Log_D(this,"get data fail:"+errorMsg.toString());
-            }
-        });
-
-
+    public void showData(SongBillListBean data) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mAdapter=new RecycAdapter(data.song_list,this);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

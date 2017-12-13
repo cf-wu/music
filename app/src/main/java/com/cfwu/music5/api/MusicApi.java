@@ -8,9 +8,9 @@ import com.cfwu.music5.bean.SongLrcBean;
 
 import java.util.Map;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
+import rx.Observable;
 
 
 /**
@@ -21,26 +21,26 @@ public interface MusicApi {
     String SUB_URL = "v1/restserver/ting";
 
     @GET(SUB_URL)
-    Call<PaySongBean> getPaySongData(@QueryMap Map<String,String> params);
+    Observable<PaySongBean> getPaySongData(@QueryMap Map<String,String> params);
 
     @GET(SUB_URL)
-    Call<SongBillListBean> getSongBillListData(@QueryMap(encoded = false) Map<String,String> parmas);
+    Observable<SongBillListBean> getSongBillListData(@QueryMap(encoded = false) Map<String,String> parmas);
 
     @GET(SUB_URL)
-    Call<SearchSongBean> searchSong(@QueryMap Map<String,String> params);
+    Observable<SearchSongBean> searchSong(@QueryMap Map<String,String> params);
 
     @GET(SUB_URL)
-    Call<SongLrcBean> getSongLrc(@QueryMap Map<String,String> params);
+    Observable<SongLrcBean> getSongLrc(@QueryMap Map<String,String> params);
 
     @GET(SUB_URL)
-    Call<RecommandSongListBean> getRecommandSongList(@QueryMap Map<String,String> params);
+    Observable<RecommandSongListBean> getRecommandSongList(@QueryMap Map<String,String> params);
 
     @GET(SUB_URL)
-    Call getDownload(@QueryMap Map<String,String> params);
+    Observable getDownload(@QueryMap Map<String,String> params);
 
     @GET(SUB_URL)
-    Call getSonger(@QueryMap Map<String,String> params);
+    Observable getSonger(@QueryMap Map<String,String> params);
 
     @GET(SUB_URL)
-    Call getSongerOfSong(@QueryMap Map<String,String> params);
+    Observable getSongerOfSong(@QueryMap Map<String,String> params);
 }

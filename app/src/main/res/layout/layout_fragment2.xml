@@ -1,35 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
-        android:id="@+id/xxx"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/et_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/ibtn_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitXY"
-            android:src="@mipmap/search_song" />
+        android:id="@+id/recyc_erro_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加载失败..."
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/recyc_reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新加载"
+            android:textSize="29sp"/>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <ProgressBar
+        android:id="@+id/recyc_progressbar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:visibility="visible"/>
+
+    <RelativeLayout
+        android:id="@+id/recyc_rootRelat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/xxx"/>
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/xxx"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/ibtn_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/search_song" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/xxx" />
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</FrameLayout>
