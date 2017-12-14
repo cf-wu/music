@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.cfwu.music5.bean.SongBillListBean;
 import com.cfwu.music5.bean.SongListBean;
-import com.cfwu.music5.fragments.Fragment2;
+import com.cfwu.music5.fragments.Fragment1;
 import com.cfwu.music5.model.IFragment2Model;
 import com.cfwu.music5.model.impl.Fragment2Modelmpl;
 import com.cfwu.music5.presenter.IFragment2Presenter;
@@ -18,18 +18,19 @@ import rx.Observer;
  */
 public class Fragment2PresenterImpl implements IFragment2Presenter {
 
-    private Fragment2 mView;
+    private Fragment1 mView;
     private IFragment2Model mModel;
-    public Fragment2PresenterImpl(IFragment2View view){
-        mView= (Fragment2) view;
-        mModel=new Fragment2Modelmpl();
+
+    public Fragment2PresenterImpl(IFragment2View view) {
+        mView = (Fragment1) view;
+        mModel = new Fragment2Modelmpl();
     }
 
-    private void getRecyclerData(){
-        mModel.getData(1, 10, 0, new Observer<SongBillListBean>() {
+    private void getRecyclerData() {
+        mModel.getData(2, 30, 0, new Observer<SongBillListBean>() {
             @Override
             public void onCompleted() {
-                LogUtils.Log_D(this,"onCompleted");
+                LogUtils.Log_D(this, "onCompleted");
                 mView.mProgressBar.setVisibility(View.GONE);
                 mView.mErrorLayout.setVisibility(View.GONE);
                 mView.mRootLayout.setVisibility(View.VISIBLE);
@@ -40,19 +41,18 @@ public class Fragment2PresenterImpl implements IFragment2Presenter {
                 mView.mProgressBar.setVisibility(View.GONE);
                 mView.mErrorLayout.setVisibility(View.VISIBLE);
                 mView.mRootLayout.setVisibility(View.GONE);
-                LogUtils.Log_D(this,"onError"+throwable.getMessage());
+                LogUtils.Log_D(this, "onError" + throwable.getMessage());
 
             }
 
             @Override
             public void onNext(SongBillListBean songBillListBean) {
-                if (songBillListBean==null){
-                    LogUtils.Log_D(this,"onNext songBillListBean==null");
+                if (songBillListBean == null || songBillListBean.song_list == null) {
+                    LogUtils.Log_D(this, "onNext songBillListBean==null");
                     return;
                 }
-                LogUtils.Log_D(this,"onNext songBillListBean"+songBillListBean.error_code);
-                for (SongListBean list:songBillListBean.song_list){
-                    LogUtils.Log_D(this,list.toString());
+                for (SongListBean list : songBillListBean.song_list) {
+                    LogUtils.Log_D(this, list.toString());
                 }
 
                 mView.mProgressBar.setVisibility(View.GONE);

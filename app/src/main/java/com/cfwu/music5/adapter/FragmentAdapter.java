@@ -1,6 +1,5 @@
 package com.cfwu.music5.adapter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
@@ -15,7 +14,7 @@ import com.cfwu.music5.fragments.Fragment5;
  */
 public class FragmentAdapter extends FragmentStatePagerAdapter {
     private String[] titles=new String[]{"推荐","排行","电台","MV","我的"};
-    Fragment[] fragments=new Fragment[5];
+    android.support.v4.app.Fragment[] fragments=new android.support.v4.app.Fragment[5];
 
 
     public FragmentAdapter(FragmentManager fm) {
@@ -28,7 +27,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public android.support.v4.app.Fragment getItem(int position) {
         return fragments[position];
     }
 

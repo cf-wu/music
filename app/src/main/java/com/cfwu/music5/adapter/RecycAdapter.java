@@ -16,7 +16,7 @@ import com.cfwu.music5.MusicPlayActivity;
 import com.cfwu.music5.R;
 import com.cfwu.music5.base.BaseFragment;
 import com.cfwu.music5.bean.SongListBean;
-import com.cfwu.music5.fragments.Fragment2;
+import com.cfwu.music5.fragments.Fragment1;
 import com.cfwu.music5.utils.LogUtils;
 
 import java.util.List;
@@ -29,7 +29,10 @@ public class RecycAdapter extends RecyclerView.Adapter<RecycAdapter.ViewH> {
     private List<SongListBean> mDataNew;
     private View mItemView;
     private BaseFragment mContext;
-    public RecycAdapter(List<SongListBean> mData, Fragment2 context) {
+    private int ItemClickNum=1;
+    private int perClickItem=-1;
+    private int recordNum=-1;
+    public RecycAdapter(List<SongListBean> mData, Fragment1 context) {
         this.mDataNew = mData;
         this.mContext=context;
     }
@@ -42,10 +45,10 @@ public class RecycAdapter extends RecyclerView.Adapter<RecycAdapter.ViewH> {
     }
 
     @Override
-    public void onBindViewHolder(ViewH viewH, int i) {
+    public void onBindViewHolder(ViewH viewH, final int i) {
         final SongListBean bean= mDataNew.get(i);
         String url=bean.pic_small.split("@")[0];
-        LogUtils.Log_D(this,url);
+        LogUtils.Log_D(this,"当前recycview显示的图片链接"+url);
         Glide
                 .with(mContext)
                 .load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513230144933&di=17b7a3442fd599220067781eb14809a5&imgtype=0&src=http%3A%2F%2Fimg.lenovomm.com%2Fs3%2Fimg%2Fapp%2Fapp-img-lestore%2F2370-2015-07-16035439-1437033279327.jpg%3FisCompress%3Dtrue%26width%3D320%26height%3D480%26quantity%3D1%26rotate%3Dtrue")
@@ -59,12 +62,25 @@ public class RecycAdapter extends RecyclerView.Adapter<RecycAdapter.ViewH> {
         mItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //跳转到播放音乐界面
-                Intent intent;
-                intent = new Intent(mContext.getActivity(), MusicPlayActivity.class);
-                intent.putExtra("musicBean",bean);
-                mContext.startActivity(intent);
-
+                //实现第一次点击播放，第二次点击同一个item跳转
+                if (i != perClickItem && ItemClickNum == 2){
+                    ItemClickNum=1;
+                }
+                perClickItem=i;
+                switch (ItemClickNum){
+                    case 1:
+                        //点击第一次播放并更新viewpager
+                        ((Fragment1)mContext).mPlayView.updateData(mDataNew,i);
+                        ItemClickNum++;
+                        break;
+                    case 2:
+                        //点击第二次跳转到播放音乐界面
+                        Intent intent;
+                        intent = new Intent(mContext.getActivity(), MusicPlayActivity.class);
+                        intent.putExtra("musicBean",bean);
+                        mContext.startActivity(intent);
+                        break;
+                }
             }
         });
         viewH.ibtn.setOnClickListener(new View.OnClickListener() {
