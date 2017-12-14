@@ -1,5 +1,6 @@
 package com.cfwu.music5.fragments;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.cfwu.music5.MainActivity;
 import com.cfwu.music5.R;
 import com.cfwu.music5.adapter.RecycAdapter;
 import com.cfwu.music5.base.BaseFragment;
 import com.cfwu.music5.bean.SongBillListBean;
 import com.cfwu.music5.presenter.IFragment2Presenter;
 import com.cfwu.music5.presenter.impl.Fragment2PresenterImpl;
+import com.cfwu.music5.utils.LogUtils;
 import com.cfwu.music5.view.IFragment2View;
+import com.cfwu.music5.view.impl.PlayView;
 
 /**
  * Created by cfwu on 17-12-12.
@@ -32,9 +36,12 @@ public class Fragment2 extends BaseFragment implements IFragment2View{
     private RecyclerView.Adapter mAdapter;
     private IFragment2Presenter mPresenter;
     private Button mReloadButton;
+
     public ProgressBar mProgressBar;
     public RelativeLayout mRootLayout;
     public LinearLayout mErrorLayout;
+    PlayView playView;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.layout_fragment2, container, false);
@@ -47,6 +54,10 @@ public class Fragment2 extends BaseFragment implements IFragment2View{
         super.onStart();
         mPresenter=new Fragment2PresenterImpl(this);
         mPresenter.OnCreat();
+        MainActivity activity = (MainActivity) getActivity();
+        LogUtils.Log_D(this,"onStart activity="+activity);
+        playView= (PlayView) activity.getPlayView();
+        LogUtils.Log_D(this,"onStart playView="+playView);
     }
 
     private void initView() {
@@ -60,6 +71,8 @@ public class Fragment2 extends BaseFragment implements IFragment2View{
         initListener();
     }
 
+
+
     private void initListener() {
         mReloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +84,16 @@ public class Fragment2 extends BaseFragment implements IFragment2View{
 
     @Override
     public void showData(SongBillListBean data) {
+        LogUtils.Log_D(this,"show data");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                super.onDraw(c, parent, state);
+            }
+        });//添加分割线，TODO:删除最后一个item的分割线
         mAdapter=new RecycAdapter(data.song_list,this);
         mRecyclerView.setAdapter(mAdapter);
+        playView.initViewPager(data.song_list,0);
     }
 }

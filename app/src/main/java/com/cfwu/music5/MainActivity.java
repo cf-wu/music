@@ -9,7 +9,8 @@ import android.view.View;
 import com.cfwu.music5.adapter.FragmentAdapter;
 import com.cfwu.music5.base.BaseActivity;
 import com.cfwu.music5.service.PlayerService;
-import com.cfwu.music5.widget.PlayView;
+import com.cfwu.music5.utils.LogUtils;
+import com.cfwu.music5.view.impl.PlayView;
 import com.cfwu.music5.widget.TabPageIndicator;
 
 import java.util.ArrayList;
@@ -65,5 +66,10 @@ public class MainActivity extends BaseActivity {
         if (intentservice != null){
             stopService(intentservice);
         }
+    }
+
+    public PlayView getPlayView(){
+        LogUtils.Log_D(this,"mPlayView"+mPlayView);
+        return mPlayView;
     }
 }

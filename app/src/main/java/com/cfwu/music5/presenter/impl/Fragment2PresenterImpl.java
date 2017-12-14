@@ -20,16 +20,13 @@ public class Fragment2PresenterImpl implements IFragment2Presenter {
 
     private Fragment2 mView;
     private IFragment2Model mModel;
-
     public Fragment2PresenterImpl(IFragment2View view){
         mView= (Fragment2) view;
         mModel=new Fragment2Modelmpl();
     }
 
-
-
     private void getRecyclerData(){
-        mModel.getData(1, 50, 0, new Observer<SongBillListBean>() {
+        mModel.getData(1, 10, 0, new Observer<SongBillListBean>() {
             @Override
             public void onCompleted() {
                 LogUtils.Log_D(this,"onCompleted");
@@ -78,4 +75,5 @@ public class Fragment2PresenterImpl implements IFragment2Presenter {
         mView.mRootLayout.setVisibility(View.GONE);
         getRecyclerData();
     }
+
 }

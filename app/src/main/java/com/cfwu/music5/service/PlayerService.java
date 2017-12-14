@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import com.cfwu.music5.contasts.Contast;
 import com.cfwu.music5.utils.LogUtils;
 
+import java.io.IOException;
+
 /**
  * Created by cfwu on 17-12-8.
  */
@@ -19,6 +21,7 @@ public class PlayerService extends Service {
     private MediaPlayer mMediaPlayer;
     private PlayBoadcast mReceiver;
     private IntentFilter mInflater;
+    String url=null;
 
     @Nullable
     @Override
@@ -56,6 +59,9 @@ public class PlayerService extends Service {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+
+            url=intent.getStringExtra("playSong");
+            LogUtils.Log_D(this, "service onReceive palySongBean="+url);
             String action = intent.getAction();
             if (Contast.ACTION_PLAY.equals(action)){
                 play();
@@ -76,6 +82,22 @@ public class PlayerService extends Service {
     }
 
     private void play() {
-        LogUtils.Log_D(this, "service play");
+        if (null == url)return;
+        LogUtils.Log_D(this, "service play url="+url);
+
+        try {
+            mMediaPlayer.setDataSource(url);
+            mMediaPlayer.prepare();
+            mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    return false;
+                }
+            });
+            mMediaPlayer.start();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

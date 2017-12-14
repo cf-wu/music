@@ -1,6 +1,9 @@
 package com.cfwu.music5.bean;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * author：agxxxx on 2017/3/3 10:49
  * email：agxxxx@126.com
@@ -9,11 +12,27 @@ package com.cfwu.music5.bean;
  * Created by Administrator on 2017/3/3.
  */
 
-public class PaySongBean {
+public class PaySongBean implements Parcelable{
 
     public String error_code;
     public BitrateBean bitrate;
     public SonginfoBean songinfo;
+
+    protected PaySongBean(Parcel in) {
+        error_code = in.readString();
+    }
+
+    public static final Creator<PaySongBean> CREATOR = new Creator<PaySongBean>() {
+        @Override
+        public PaySongBean createFromParcel(Parcel in) {
+            return new PaySongBean(in);
+        }
+
+        @Override
+        public PaySongBean[] newArray(int size) {
+            return new PaySongBean[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -24,7 +43,17 @@ public class PaySongBean {
                 '}';
     }
 
-    public static class BitrateBean {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(error_code);
+    }
+
+    public static class BitrateBean implements Parcelable {
         public String file_bitrate;
         public String free;
         public String file_link;
@@ -35,6 +64,31 @@ public class PaySongBean {
         public String show_link;
         public String song_file_id;
         public String replay_gain;
+
+        protected BitrateBean(Parcel in) {
+            file_bitrate = in.readString();
+            free = in.readString();
+            file_link = in.readString();
+            file_extension = in.readString();
+            original = in.readString();
+            file_size = in.readString();
+            file_duration = in.readString();
+            show_link = in.readString();
+            song_file_id = in.readString();
+            replay_gain = in.readString();
+        }
+
+        public static final Creator<BitrateBean> CREATOR = new Creator<BitrateBean>() {
+            @Override
+            public BitrateBean createFromParcel(Parcel in) {
+                return new BitrateBean(in);
+            }
+
+            @Override
+            public BitrateBean[] newArray(int size) {
+                return new BitrateBean[size];
+            }
+        };
 
         @Override
         public String toString() {
@@ -51,8 +105,27 @@ public class PaySongBean {
                     ", replay_gain='" + replay_gain + '\'' +
                     '}';
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(file_bitrate);
+            dest.writeString(free);
+            dest.writeString(file_link);
+            dest.writeString(file_extension);
+            dest.writeString(original);
+            dest.writeString(file_size);
+            dest.writeString(file_duration);
+            dest.writeString(show_link);
+            dest.writeString(song_file_id);
+            dest.writeString(replay_gain);
+        }
     }
-    public static class SonginfoBean {
+    public static class SonginfoBean implements Parcelable{
         public String artist_id;
         public String all_artist_id;
         public String album_no;
@@ -93,6 +166,61 @@ public class PaySongBean {
         public String collect_num;
         public String share_num;
         public String comment_num;
+
+        protected SonginfoBean(Parcel in) {
+            artist_id = in.readString();
+            all_artist_id = in.readString();
+            album_no = in.readString();
+            pic_big = in.readString();
+            pic_small = in.readString();
+            relate_status = in.readString();
+            resource_type = in.readString();
+            copy_type = in.readString();
+            lrclink = in.readString();
+            pic_radio = in.readString();
+            toneid = in.readString();
+            all_rate = in.readString();
+            play_type = in.readString();
+            has_mv_mobile = in.readString();
+            pic_premium = in.readString();
+            pic_huge = in.readString();
+            resource_type_ext = in.readString();
+            bitrate_fee = in.readString();
+            publishtime = in.readString();
+            si_presale_flag = in.readString();
+            del_status = in.readString();
+            song_id = in.readString();
+            title = in.readString();
+            ting_uid = in.readString();
+            author = in.readString();
+            album_id = in.readString();
+            album_title = in.readString();
+            is_first_publish = in.readString();
+            havehigh = in.readString();
+            charge = in.readString();
+            has_mv = in.readString();
+            learn = in.readString();
+            song_source = in.readString();
+            piao_id = in.readString();
+            korean_bb_song = in.readString();
+            mv_provider = in.readString();
+            special_type = in.readString();
+            collect_num = in.readString();
+            share_num = in.readString();
+            comment_num = in.readString();
+        }
+
+        public static final Creator<SonginfoBean> CREATOR = new Creator<SonginfoBean>() {
+            @Override
+            public SonginfoBean createFromParcel(Parcel in) {
+                return new SonginfoBean(in);
+            }
+
+            @Override
+            public SonginfoBean[] newArray(int size) {
+                return new SonginfoBean[size];
+            }
+        };
 
         @Override
         public String toString() {
@@ -138,6 +266,55 @@ public class PaySongBean {
                     ", share_num='" + share_num + '\'' +
                     ", comment_num='" + comment_num + '\'' +
                     '}';
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(artist_id);
+            dest.writeString(all_artist_id);
+            dest.writeString(album_no);
+            dest.writeString(pic_big);
+            dest.writeString(pic_small);
+            dest.writeString(relate_status);
+            dest.writeString(resource_type);
+            dest.writeString(copy_type);
+            dest.writeString(lrclink);
+            dest.writeString(pic_radio);
+            dest.writeString(toneid);
+            dest.writeString(all_rate);
+            dest.writeString(play_type);
+            dest.writeString(has_mv_mobile);
+            dest.writeString(pic_premium);
+            dest.writeString(pic_huge);
+            dest.writeString(resource_type_ext);
+            dest.writeString(bitrate_fee);
+            dest.writeString(publishtime);
+            dest.writeString(si_presale_flag);
+            dest.writeString(del_status);
+            dest.writeString(song_id);
+            dest.writeString(title);
+            dest.writeString(ting_uid);
+            dest.writeString(author);
+            dest.writeString(album_id);
+            dest.writeString(album_title);
+            dest.writeString(is_first_publish);
+            dest.writeString(havehigh);
+            dest.writeString(charge);
+            dest.writeString(has_mv);
+            dest.writeString(learn);
+            dest.writeString(song_source);
+            dest.writeString(piao_id);
+            dest.writeString(korean_bb_song);
+            dest.writeString(mv_provider);
+            dest.writeString(special_type);
+            dest.writeString(collect_num);
+            dest.writeString(share_num);
+            dest.writeString(comment_num);
         }
     }
 }

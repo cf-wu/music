@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by cfwu on 17-12-8.
  */
-public abstract class BaseAdapter  extends PagerAdapter {
-    protected List mDataList;
+public abstract class BaseAdapter<T>  extends PagerAdapter {
+    protected List<T> mDataList;
     protected Context mContext;
-    public BaseAdapter(Context context,List mDataList){
-        this.mDataList=mDataList;
+    public BaseAdapter(Context context,List<T> data){
+        this.mDataList=data;
         this.mContext=context;
     }
     @Override
